@@ -29,6 +29,8 @@
 
 (defvar *pages* nil)
 
+(defvar *entries* '())
+
 (setf *pages* '(("one" . "this is a page apparently")
 		("home" . "this is home page string from *pages* alist")))
 
@@ -63,6 +65,15 @@
 	 (make-instance 'weblog-entry :title title :body body :tags tags)))
     (process-weblog-entry entry)
     entry))
+
+(defun weblog-page ()
+  (define-easy-handler (weblog :uri "/weblog") (title body tags)
+    (setf (content-type*) "text/html")
+    (push (build-weblog-entry title body tags) *entries*)
+    (format nil "~a"
+	    "hello there")))
+
+
 
 (defun css-page ()
   (define-easy-handler (css :uri "/css") ()
@@ -142,7 +153,7 @@
 
 
 
-#|
+
 ;; uncomment before interpretation to daemonize!
 
 (defparameter *finished* nil)
@@ -162,4 +173,4 @@
      (kill)
      (sb-ext:exit)))
 ;;
-|#
+
