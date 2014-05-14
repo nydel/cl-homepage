@@ -210,4 +210,4 @@
    (sleep 1)
    (when *finished*
      (kill)
-     (sb-ext:quit)))
+     (sb-ext:exit)))
