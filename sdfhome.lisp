@@ -1,4 +1,5 @@
-(ql:quickload '(:bordeaux-threads
+(ql:quickload '(:alexandria
+		:bordeaux-threads
 		:cl-daemonize
 		:cl-markup
 		:cl-ppcre
@@ -13,6 +14,7 @@
 (defpackage :cl-sdf-home
   (:nicknames :cl-sdf :sdf-home :sdf :home)
   (:use :common-lisp
+	:alexandria
 	:hunchentoot)
   (:export :main))
 
@@ -70,9 +72,56 @@
   (define-easy-handler (weblog :uri "/weblog") (title body tags)
     (setf (content-type*) "text/html")
     (push (build-weblog-entry title body tags) *entries*)
-    (format nil "~a"
-	    "hello there")))
+    (redirect "/weblogdisplay")))
 
+(defun weblog-form-page ()
+  (define-easy-handler (weblogentry :uri "/weblogentry") ()
+    (setf (content-type*) "text/html")
+    (format nil "~a"
+	    (markup:html
+	     (:head
+	      (:title "weblogentry - nydel.sdf.org"))
+	     (:body
+	      (:div :id "maincontainer"
+		    (:form :action "/weblog" :method "get"
+			   (:input :type "text" :name "title")
+			   (:textarea :name "body" "")
+			   (:input :type "text" :name "tags")
+			   (:input :type "submit"))))))))
+
+;; next we need a display page for the weblog entries
+
+(defun format-weblog (entry)
+  (let* ((timestamp (slot-value entry 'timestamp))
+	 (timestamp-display (local-time:format-timestring nil timestamp :format '((:year 4 #\0) "."
+										  (:month 2 #\0) "."
+										  (:day 2 #\0) " | "
+										  (:hour 2 #\0) ":"
+										  (:min 2 #\0) ":"
+										  (:sec 2 #\0))))
+	(title (slot-value entry 'title))
+	(body (slot-value entry 'body))
+	(tags (slot-value entry 'tags)))
+    (markup:markup (:dl
+		    (:dt timestamp-display)
+		    (:dd
+		     (:img :src (random-elt '("http://nydel.sdf.org/images/idea.png"
+					      "http://nydel.sdf.org/images/lisp-logo.png"
+					      "http://nydel.sdf.org/images/social.png"
+					      "http://nydel.sdf.org/images/turntable.png")) :style "float: left; width: 48px; height: 48px;")
+		     (:pre title)
+		     (:pre body)
+		     (:pre tags))))))
+
+(defun display-weblog-page ()
+  (define-easy-handler (weblogdisplay :uri "/weblogdisplay") ()
+    (setf (content-type*) "text/html")
+    (format nil "~{~a~%~}"
+	    (mapcar (lambda (y)
+		      (format-weblog y)) *entries*))))
+
+;; then a method to save them and retrieve them etc
+;; consider a comments section /after/ that
 
 
 (defun css-page ()
@@ -151,11 +200,8 @@
   (test-page)
   (css-page))
 
-
-
-
 ;; uncomment before interpretation to daemonize!
-
+#|
 (defparameter *finished* nil)
 
 (cl-daemonize:daemonize :out "output.log"
@@ -172,5 +218,4 @@
    (when *finished*
      (kill)
      (sb-ext:exit)))
-;;
-
+|#
