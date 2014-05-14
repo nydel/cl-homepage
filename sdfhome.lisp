@@ -99,12 +99,12 @@
   (define-easy-handler (css :uri "/css") ()
     (setf (content-type*) "text/css")
     (format nil "~a"
-	    (css-lite:css (("html, body, div, p")
+	    (css-lite:css (("html, body, div, p, li")
 			   (:font-family "ubuntu mono, verdana, sans-serif"
 			    :font-size "10pt"
 			    :color "#111111"
-			    :padding "0"
-			    :margin "0"))
+			    :padding "1px"
+			    :margin "1px"))
 			  (("a:link")
 			   (:text-decoration "none"))
 			  (("a:hover")
@@ -175,20 +175,42 @@
 	      (:div :id "mainContainer"
 		    (:h3 "nydel.sdf.org")
 		    (:hr :class "thin")
+		    (:hr :class "thin")
+		    (:hr :class "thin")
 		    (:pre "welcome to nydel's home at sdf.")
 		    (:hr :class "thin")
+		    (:hr :class "thin")
 		    (:pre
-		     (:a :href "https://github.com/miercoledi/cl-homepage.git"
-			 "cl-homepage") " - "
-		     (:a :href ""
-			 "another link"))
+		     (:ul
+		      (:li
+		       (:a :href "https://github.com/miercoledi/cl-homepage.git"
+			   "cl-homepage") " - this website's common lisp software source on github")
+		      (:li
+		       (:a :href "http://nydel.sdf.org/phlog-entries/m01-0"
+			   "misinformationship 01.0") " - on the 'semper-verum' concept in meme theory")
+		      (:li
+		       (:a :href "http://meerkat.cc"
+			   "meerkat.cc") " - my band's homepage, also see our "
+			   (:a :href "https://soundcloud.com/joshuatrout"
+			       "soundcloud") " for more meerkat music")))
 		    (:hr :class "thin")
 ;		    (get-chirp-home)
 		    (:hr :class "thin")
 ;		    (:pre :class "content" (pull-page "home"))
 		    (:hr :class "thin")
-		    (:pre "put an ad for sdf here.")))))))
+		    (:pre :style "text-align: center;"
+		     (:a :href "http://sdf.lonestar.org"
+			 (:img :src "http://roint.sdf1.org/portfolio/decscope.png" :style "width: 200px; height: 90px;")))))))))
 
+(defun main ()
+  (init)
+  (test-page)
+  (css-page))
+
+
+
+
+;; uncomment before interpretation to daemonize!
 
 (defparameter *finished* nil)
 
@@ -199,11 +221,6 @@
 				(declare (ignore args))
 				(setf *finished* t)))
 
-(defun main ()
-  (init)
-  (test-page)
-  (css-page))
-
 (main)
 
 (loop :do
@@ -211,3 +228,4 @@
    (when *finished*
      (kill)
      (sb-ext:exit)))
+;;
