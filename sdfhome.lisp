@@ -1,5 +1,4 @@
 (ql:quickload '(:bordeaux-threads
-		:chirp
 		:cl-daemonize
 		:cl-markup
 		:cl-ppcre
@@ -85,24 +84,10 @@
 			    :color "darkgreen"))
 			  (("a:visited")
 			   (:text-decoration "none"))
-			   (("div#mainContainer")
-			    (:margin-left "auto"
-		             :margin-right "auto"
-			     :width "60%"))
-			   (("p.tweet")
-			    (:font-size "09pt"
-			     :border "1px solid #666666"
-			     :border-radius "5px 5px 5px 5px"
-			     :padding "5px"
-			     :margin "8px"))
-			   (("p.tweettime")
-			    (:font-size "06pt"
-			     :padding "2px"
-			     :margin "3px"))
-			   (("p.tweetuser")
-			    (:font-size "08pt"
-			     :padding "3px"
-			     :margin "4px"))
+			  (("div#mainContainer")
+			   (:margin-left "auto"
+			    :margin-right "auto"
+			    :width "60%"))
 			   (("hr.thin")
 			    (:border "1px solid #000000"
 			     :border-top "0"
@@ -120,7 +105,7 @@
 	     (:head
 	      (:title "nydel.sdf.org")
 	      (:link :rel "stylesheet" :type "text/css" :href "http://nydel.sdf.org:9903/css")
-	      (:link :rel "shortcut icon" :type "text/png" :href "http://floss.zoomquiet.io/ ÚG#ÚGdata/20111102224152/lisp_logo_mid.png"))
+	      (:link :rel "shortcut icon" :type "text/png" :href "http://floss.zoomquiet.io/data/20111102224152/lisp_logo_mid.png"))
 	     (:body
 	      (:div :id "mainContainer"
 		    (:h3 "nydel.sdf.org")

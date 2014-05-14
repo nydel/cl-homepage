@@ -102,3 +102,12 @@
 
 "unknown &KEY argument: :UNIX-STATUS" 192.94.73.31 - [2014-05-14 10:08:16] "GET / HTTP/1.1" 200 1240 "-" "Python-urllib/2.6"
 72.197.245.1 - [2014-05-14 10:08:17] "GET /css HTTP/1.1" 200 719 "http://nydel.sdf.org/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+192.94.73.31 - [2014-05-14 10:09:24] "GET / HTTP/1.1" 200 1240 "-" "Python-urllib/2.6"
+72.197.245.1 - [2014-05-14 10:09:24] "GET /css HTTP/1.1" 200 719 "http://nydel.sdf.org/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+192.94.73.31 - [2014-05-14 10:09:34] "GET / HTTP/1.1" 200 1240 "-" "Python-urllib/2.6"
+72.197.245.1 - [2014-05-14 10:09:35] "GET /css HTTP/1.1" 200 719 "http://nydel.sdf.org/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+192.94.73.31 - [2014-05-14 10:11:36] "GET / HTTP/1.1" 200 1240 "-" "Python-urllib/2.6"
+72.197.245.1 - [2014-05-14 10:11:36] "GET /css HTTP/1.1" 200 719 "http://nydel.sdf.org/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+192.94.73.31 - [2014-05-14 11:38:44] "GET / HTTP/1.1" 200 1240 "-" "Python-urllib/2.6"
+72.197.245.1 - [2014-05-14 11:38:45] "GET /css HTTP/1.1" 200 719 "http://nydel.sdf.org/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+;; swank:close-connection: end of file on #<SB-SYS:FD-STREAM for "socket 127.0.0.1:44234, peer: 127.0.0.1:46948" {1005FD4A83}>
