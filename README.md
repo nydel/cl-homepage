@@ -1,5 +1,7 @@
 :cl-homepage package
 
+[simple commonlisp w3 home fetched via py/pl](http://nydel.sdf.org)
+
 this is a simple :hunchentoot accessor running on some trivial unprivileged port
 with something other than lisp running a simple cgi get on the lisp page itself
 so you can run yourself a webserver on (e.g.) port 9903 then instruct a simple
